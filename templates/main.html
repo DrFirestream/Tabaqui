@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Generate text</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/animate/animate.css') }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/css-hamburgers/hamburgers.min.css') }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/animsition/css/animsition.min.css') }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/select2/select2.min.css') }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/daterangepicker/daterangepicker.css') }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/util.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+<!--===============================================================================================-->
+</head>
+<body>
+
+
+	<div class="container-contact100">
+
+		<div class="wrap-contact100">
+			<form name="submform" id="submform" class="contact100-form validate-form" action="{{ url_for('main') }}" method="POST">
+				<span class="contact100-form-title" id="titlespan">
+                    Generate text
+				</span>
+
+				<div class="wrap-input100 validate-input" data-validate = "Please start your text">
+					<textarea class="input100" name="message" placeholder="Your Message">{{ result }}</textarea>
+					<span class="focus-input100"></span>
+                    <textarea name="submitted" style="display:none;">{{ submitted }}</textarea>
+                    <textarea name="requestid" style="display:none;">{{ requestid }}</textarea>
+				</div>
+
+				<div class="container-contact100-form-btn">
+					<button class="contact100-form-btn">
+						<span>
+							<i class="fa fa-paper-plane-o m-r-6" aria-hidden="true"></i>
+							Send
+						</span>
+					</button>
+				</div>
+			</form>
+            
+		</div>
+	</div>
+<script type="text/javascript">
+window.onload=function(){
+    if (document.submform.requestid.textContent) { 
+        var counter = 20;
+        var interval = setInterval(function() {
+            counter--;
+            document.getElementById('titlespan').textContent = 'Result in ' + counter + ' s';
+            if (counter == 0) {
+                redirect();
+                clearInterval(interval);
+            }
+        }, 1000);
+    }
+};
+
+function redirect() {
+    document.submform.submit();
+}
+</script>
+</body>
+</html>
